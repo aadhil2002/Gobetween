@@ -77,7 +77,7 @@ Users booking trips perform the following functions:
 To get started with "GO BETWEEN TRANSPORTATION" using Django, follow these steps:
 
 1. Clone the repository:
-   git clone https://github.com/your-username/go-between-transportation.git
+   git clone https://github.com/aadhil2002/Gobetween.git
 
 2. Navigate into the project directory:
    cd go-between-transportation
