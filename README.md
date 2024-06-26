@@ -72,10 +72,37 @@ Users booking trips perform the following functions:
 - View trip details and make payments.
 - Send and view complaints and feedback.
 
-## Getting Started
+## Getting Started with Django
 
-To get started with "GO BETWEEN TRANSPORTATION," clone the repository and follow the setup instructions for each module in their respective directories.
+To get started with "GO BETWEEN TRANSPORTATION" using Django, follow these steps:
 
+1. Clone the repository:
+   git clone https://github.com/your-username/go-between-transportation.git
+
+2. Navigate into the project directory:
+   cd go-between-transportation
+   
+3. Set up a virtual environment (optional but recommended):
+   python -m venv env
+
+4. Activate the virtual environment (Windows):
+   env\Scripts\activate
+   or (Mac/Linux):
+   source env/bin/activate
+   
+5. Install necessary dependencies
+
+6. Apply migrations:
+   python manage.py migrate
+
+7. Create a superuser (admin):
+   python manage.py createsuperuser
+
+8. Start the development server:
+   python manage.py runserver
+
+9. Open your web browser and navigate to 'http://localhost:8000' to view the application.
+  
 ## Contributing
 
 Contributions are welcome! Please fork the repository and submit a pull request with your enhancements.
