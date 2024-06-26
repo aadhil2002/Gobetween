@@ -1,0 +1,75 @@
+{% extends 'user/user_base.html' %}
+
+{% load static %}
+
+
+{% block content %}
+{% if message %}
+<script>
+alert("{{ message }}")
+</script>
+{% endif %}
+<br><br><br><br>
+<section class="intro-single">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-lg-8">
+        <div class="title-single-box">
+          <h2 class="mb-5 text-uppercase">Driver Search</h2>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!--/ Intro Single End /-->
+<br><br><br><br>
+<!--/ Contact Star /-->
+<section class="contact">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="contact-map box">
+
+        </div>
+      </div>
+        <div class="col-sm-12 section-t8">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="container add-emp" style="overflow-x:auto;border-radius: 5px;
+              background-color: #f2f2f2;
+              padding: 20px;
+                margin-top: -150px;">
+   <table class="table table-bordered table-striped table-hover">
+
+<th class="info" style="background-color: lightgreen;">Driver Name</th>
+<th class="info" style="background-color: lightgreen;">Contact</th>
+<th class="info" style="background-color: lightgreen;">District</th>
+<th class="info" style="background-color: lightgreen;">State</th>
+<th class="info" style="background-color: lightgreen;">Request Trip</th>
+
+
+{% for dri in driver_list %}
+
+<tr>
+    <td>{{ dri.user.first_name}}</td>
+    <td>{{ dri.mobile}}</td>
+    <td>{{ dri.district}}</td>
+    <td>{{ dri.state}}</td>
+
+    <td><a href="request_driver?id={{dri.id}}" class=" btn btn-success">Request</a></td>
+
+</tr>
+
+    {% endfor %}
+</table>
+</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

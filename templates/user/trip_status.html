@@ -1,0 +1,56 @@
+{% extends 'user/user_base.html' %}
+{% load static %}
+{% block content %}
+{% if message %}
+<script>
+alert("{{ message }}")
+</script>
+{% endif %}
+  <section class="breadcumb-area bg-img bg-overlay" style="background-image: url({% static 'img/bg-img/breadcumb3.jpg' %});">
+        <div class="bradcumbContent">
+            <p></p>
+            <h2></h2>
+        </div>
+    </section>
+
+
+ <div class="container add-emp" style="overflow-x:auto;">
+			<center><h1 style="color:black;"><strong>Trip Status</strong></h1><br></center>
+			<table class="table table-bordered table-hover">
+				<thead class="thead-dark">
+					<tr>
+						<th class="p-3 mb-2 bg-primary text-light">Pickup Place</th>
+						<th class="p-3 mb-2 bg-primary text-light">To Place</th>
+                        <th class="p-3 mb-2 bg-primary text-light">Mobile</th>
+                        <th class="p-3 mb-2 bg-primary text-light">Time</th>
+                        <th class="p-3 mb-2 bg-primary text-light">Date</th>
+                        <th class="p-3 mb-2 bg-primary text-light">No Of Person</th>
+                        <th class="p-3 mb-2 bg-primary text-light">Trip Amount</th>
+						<th class="p-3 mb-2 bg-primary text-light">Status</th>
+                        <th class="p-3 mb-2 bg-primary text-light">Proceed To Payment</th>
+
+                    </tr>
+                    
+                    {% for v in ts %}
+                    {% if  v.trip.payment is None %}
+                    <tr>
+							<td>{{ v.trip.pickup_place }}</td>
+                    		<td>{{ v.trip.to_place }}</td>
+                            <td>{{ v.trip.mobile }}</td>
+                            <td>{{ v.trip.time }}</td>
+                            <td>{{ v.trip.date }}</td>
+                            <td>{{ v.trip.no_of_person }}</td>
+                            <td>{{ v.total_amt }}</td>
+                    <td>{{ v.trip.status }}</td>
+
+                    {% if v.trip.payment == NULL %}<td><a type="submit" href="trip_payment?id={{ v.id}}" class=" btn btn-success">pay</a></td>{% endif %}
+						</tr>
+                        {% endif %}
+                    {% endfor %}
+                    
+    
+
+		    </table>
+		</div>
+  
+  {% endblock %}

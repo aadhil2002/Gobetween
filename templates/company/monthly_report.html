@@ -1,0 +1,51 @@
+
+{% extends 'company/company_base.html' %}
+
+{% load static %}
+
+
+{% block content %}
+
+
+        {% if message %}
+<script>
+alert("{{ message }}")
+</script>
+    {% endif %}
+<br><br>
+    <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-md-6 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+
+                <form action="" method="POST" class="forms-sample">
+                      {% csrf_token %}
+                    <div class="form-group">
+                  
+
+
+                        <label for="exampleInputUsername1">Options</label>
+                       <select class="form-control"  name="options" id="slctDistrict" required="required" onchange="show_dis(this.value,0)" >
+                            <option  required="required">---Select---</option>
+                            <option value="user">Users</option>
+                           <option value="driver">Driver</option>
+                           <option value="trip">Trip</option>
+                             </select>
+                        <br>
+
+                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
+
+                  </form>
+
+                </div>
+              </div>
+            </div>
+
+            </div>
+            </div>
+          </div>
+
+    
+{% endblock %}

@@ -1,0 +1,99 @@
+{% extends 'user/user_base.html' %}
+
+{% load static %}
+
+
+{% block content %}
+{% if message %}
+<script>
+alert("{{ message }}")
+</script>
+{% endif %}
+
+<section class="gradient-custom">
+    <div class="container my-5 py-5">
+      <div class="row d-flex justify-content-center py-5">
+        <div class="col-md-6 col-lg-4 col-xl-3">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body  p-4">
+              <button onclick="generateQR()" style="margin-bottom:40px" class="learn-more-btn">Generate QR Code</button>
+              {% if  trip.trip.company.upi_qrcode is not None %} 
+              <input type="hidden" id="qr-text" value="{{ trip.trip.company.upi_qrcode }}">
+              {% else %}
+              <input type="hidden" id="qr-text" value="{{ trip.driver.qrcode }}">
+              {% endif %}
+              <div style="float:below; margin-left:15px"  id="qr-result">
+                <img id="imgQrCode" src=""></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8 col-lg-6 col-xl-5">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-4">
+              <form action="trip_payment" method="post" onsubmit="return validateForm()">
+
+                {% csrf_token %}
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div class="form-outline">
+                    <input type="text" id="typeText" class="form-control form-control-lg" size="17"
+                      placeholder="1234 5678 9012 3457" minlength="16" maxlength="16" pattern="[0-9]{16}" title="Please Enter a Valid Card Number" required/>
+                    <label class="form-label" for="typeText">Card Number</label>
+                  </div>
+                  <img src="{% static 'img/visa.png' %}" alt="visa" width="64px" />
+                  <img src="{% static 'img/mastercard.png' %}" alt="mastercard" width="64px" />
+                </div>
+  
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                  <div class="form-outline">
+                    <input type="text" id="typeName" class="form-control form-control-lg" size="16"
+                      placeholder="Cardholder's Name" required />
+                    <label class="form-label" for="typeName">Cardholder's Name</label>
+                  </div>
+                  <img src="{% static 'img/american-express.png' %}" alt="american-express" width="64px" />
+                  <img src="{% static 'img/rupay.png' %}" alt="rupay" width="64px" />
+                </div>
+                <input type="hidden" id="typeExp" value="{{trip.trip.id}}" name="id" class="form-control form-control-lg">
+
+                <div class="d-flex justify-content-between align-items-center pb-2">
+                  <div class="form-outline">
+                    <input type="number" id="expMonth" min="1" max="12" step="1"  class="form-control form-control-lg">
+                      <label class="form-label" for="typeExp">Expiration Month</label>
+                  </div>  
+                      <div class="form-outline">
+                        <input type="number" id="expYear" min="" max="2099" step="1"  class="form-control form-control-lg">
+                        
+                    <label class="form-label" for="typeExp">Expiration Year</label>
+                  </div>
+                  <div class="form-outline">
+                    <input type="password" id="typeText2" class="form-control form-control-lg"
+                      placeholder="&#9679;&#9679;&#9679;" size="1" minlength="3" maxlength="3" required />
+                    <label class="form-label" for="typeText2">Cvv</label>
+                  </div>
+                  <button type="submit" class="btn btn-info btn-lg btn-rounded">
+                    <i class="fas fa-arrow-right"></i>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script>
+ function generateQR() {
+     const text = document.getElementById("qr-text").value;
+     let finalURL = 'https://chart.googleapis.com/chart?cht=qr&chl=' + encodeURI(text)+ '&chs=160x160&chld=L|0'
+     document.getElementById("imgQrCode").src = finalURL;
+
+ }
+</script>
+ <script>
+  var today = new Date();
+  var yyyy = today.getFullYear();    
+  year = yyyy;
+  expYear=document.getElementById("expYear");
+  document.getElementById("expYear").setAttribute("min", year);
+  </script>
+{% endblock %}

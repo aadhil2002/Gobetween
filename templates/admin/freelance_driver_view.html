@@ -1,0 +1,75 @@
+
+{% extends 'admin/admin_base.html' %}
+{% load static %}
+{% block content %}
+{% if message %}
+<script>
+alert("{{ message }}")
+</script>
+{% endif %}
+<br><br><br><br>
+  <!--/ Intro Single star /-->
+  <section class="intro-single">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-lg-8">
+          <div class="title-single-box">
+            <h2 class="mb-5 text-uppercase">Freelance Driver View</h2>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!--/ Intro Single End /-->
+<br><br><br><br>
+  <!--/ Contact Star /-->
+  <section class="contact">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="contact-map box">
+
+          </div>
+        </div>
+        <div class="col-sm-12 section-t8">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="container add-emp" style="overflow-x:auto;border-radius: 5px;
+              background-color: #f2f2f2;
+              padding: 20px;
+                margin-top: -150px;">
+   <table class="table table-bordered table-striped table-hover">
+
+<th class="info" style="background-color: lightgreen;">Driver Name</th>
+<th class="info" style="background-color: lightgreen;">Email</th>
+<th class="info" style="background-color: lightgreen;">Reason</th>
+<th class="info" style="background-color: lightgreen;">Reject</th>
+{% for dri in app_company  %}
+
+<tr>
+    <td>{{ dri.user.first_name}}</td>
+    <td>{{ dri.user.email}}</td>
+    <form action="" method="post">
+      {% csrf_token %}
+      <td><input type="text" class="form-control" name="reason" required></td>
+      <input type="hidden" name="id" value="{{ dri.user_id}}">
+      <td><button type="submit" class="btn btn-danger">Reject</button></td>
+      </form>
+</tr>
+
+    {% endfor %}
+</table>
+</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+  <!--/ Contact End /-->
+
+  <!--/ footer Star /-->

@@ -1,0 +1,41 @@
+{% extends 'user/user_base.html' %}
+{% load static %}
+{% block content %}
+{% if message %}
+<script>
+alert("{{ message }}")
+</script>
+{% endif %}
+  <section class="breadcumb-area bg-img bg-overlay" style="background-image: url({% static 'img/bg-img/breadcumb3.jpg' %});">
+        <div class="bradcumbContent">
+            <p></p>
+            <h2></h2>
+        </div>
+    </section>
+
+
+ <div class="container add-emp" style="overflow-x:auto;">
+			<center><h2 style="color:black;"><strong>View Complaint</strong></h2><br></center>
+			<table class="table table-bordered table-hover">
+				<thead class="thead-dark">
+					<tr>
+						<th class="p-3 mb-2 bg-primary text-light">Name</th>
+						<th class="p-3 mb-2 bg-primary text-light">Email</th>
+                        <th class="p-3 mb-2 bg-primary text-light">Subject</th>
+                        <th class="p-3 mb-2 bg-primary text-light">Complaint</th>
+                        <th class="p-3 mb-2 bg-primary text-light">Reply</th>
+                    {% for r in reply %}
+                    </tr>
+							<td>{{ r.name }}</td>
+                    		<td>{{ r.email }}</td>
+                            <td>{{ r.subject }}</td>
+                            <td>{{ r.complaint }}</td>
+                            <td>{{ r.action }}</td>
+
+						</tr>
+                {% endfor %}
+
+		    </table>
+		</div>
+  
+  {% endblock %}

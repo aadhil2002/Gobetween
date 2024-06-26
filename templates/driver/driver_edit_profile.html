@@ -1,0 +1,164 @@
+
+{% extends 'driver/driver_base.html' %}
+
+{% load static %}
+
+
+{% block content %}
+{% if message %}
+<script>
+alert("{{ message }}")
+</script>
+{% endif %}
+
+{% for r in driver  %}
+
+<!-- edit_profile-->
+
+<form class="h-100 h-custom bg-dark" action="" enctype="multipart/form-data" method="post">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-lg-8 col-xl-10">
+          <div class="card rounded-3">
+            {% comment %} <img src="{% static 'img/company.jpg' %}"
+              class="w-100" style="border-top-left-radius: .3rem; border-top-right-radius: .3rem;"
+              alt="Sample photo"> {% endcomment %}
+            <div class="card-body p-4 p-md-5">
+              <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Edit Profile</h3>
+              {% csrf_token %}
+              <div class="form-outline mb-4">
+                <input type="text" name="driver_name" placeholder="Name" class="form-control form-control-lg" required value="{{ r.user.first_name}}"/>
+            </div>
+
+              <div class="form-outline mb-4">
+                <input type="text" name="mobile" placeholder="Mobile No." class="form-control form-control-lg" value="{{ r.mobile}}"/>
+              </div>
+              
+              <div class="form-outline mb-4">
+                <input type="text"  name="license_no" placeholder="License No." class="form-control form-control-lg" value="{{ r.license_no}}"/>
+              </div>
+
+              <div class="form-outline mb-4">
+                <input type="text" name="email" placeholder="Email" class="form-control form-control-lg" value="{{ r.user.email}}"/>
+              </div>
+
+              <div class="row">
+                <div class="form-outline col-md-6 mb-4">
+                  <h6 class="form-label" for="form3Example1q">Driving Experience: </h6>
+                  <input type="number" name="driving_exp" min="1" id="form3Example1q" class="form-control form-control-lg" value="{{ r.driving_experience}}" required/>
+                  
+                </div>
+      
+  
+                <div class="form-outline col-md-6 mb-4">
+                  <h6 class="form-label" for="form3Example1q">Date Of Birth: </h6>
+                  <input type="date" name="DateOB" id="form3Example1q" class="form-control form-control-lg" value="{{r.DateOB|date:"Y-m-d" }}" required/>
+                </div>
+              </div>
+  
+  
+               
+               <div class="mb-3">
+  <label for="formFile" class="form-label"><h6 class="form-label" for="form3Example1q">Driver Photo:</h6></label>
+  <input class="form-control" name="driver_photo" type="file" id="formFile" required>
+  </div>
+
+              <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
+                <h6 class="mb-0 me-4">Gender: </h6>
+                  {% if r.gender == "Male" %}
+                <div class="form-check form-check-inline mb-0 me-4">
+                  <input class="form-check-input" name="gender" type="radio" name="inlineRadioOptions" id="maleGender" checked
+                    value="Male" required/>
+                  <label class="form-check-label" for="maleGender">Male</label>
+                </div>
+
+                <div class="form-check form-check-inline mb-0 me-4">
+                  <input class="form-check-input" name="gender" type="radio" name="inlineRadioOptions" id="femaleGender"
+                    value="Female" required/>
+                  <label class="form-check-label" for="femaleGender">Female</label>
+                </div>
+
+                <div class="form-check form-check-inline mb-0">
+                  <input class="form-check-input" name="gender" type="radio" name="inlineRadioOptions" id="otherGender"
+                    value="Other" required/>
+                  <label class="form-check-label" for="otherGender">Other</label>
+                </div>
+                {% endif %}
+                {% if r.gender == "Female" %}
+                <div class="form-check form-check-inline mb-0 me-4">
+                  <input class="form-check-input" name="gender" type="radio" name="inlineRadioOptions" id="maleGender" 
+                    value="Male" required/>
+                  <label class="form-check-label" for="maleGender">Male</label>
+                </div>
+
+                <div class="form-check form-check-inline mb-0 me-4">
+                  <input class="form-check-input" name="gender" type="radio" name="inlineRadioOptions" id="femaleGender" checked
+                    value="Female" required/>
+                  <label class="form-check-label" for="femaleGender">Female</label>
+                </div>
+
+                <div class="form-check form-check-inline mb-0">
+                  <input class="form-check-input" name="gender" type="radio" name="inlineRadioOptions" id="otherGender"
+                    value="Other" required/>
+                  <label class="form-check-label" for="otherGender">Other</label>
+                </div>
+                {% endif %}
+                {% if r.gender == "Other" %}
+                <div class="form-check form-check-inline mb-0 me-4">
+                  <input class="form-check-input" name="gender" type="radio" name="inlineRadioOptions" id="maleGender" 
+                    value="Male" required/>
+                  <label class="form-check-label" for="maleGender">Male</label>
+                </div>
+
+                <div class="form-check form-check-inline mb-0 me-4">
+                  <input class="form-check-input" name="gender" type="radio" name="inlineRadioOptions" id="femaleGender"
+                    value="Female" required/>
+                  <label class="form-check-label" for="femaleGender">Female</label>
+                </div>
+
+                <div class="form-check form-check-inline mb-0">
+                  <input class="form-check-input" name="gender" type="radio" name="inlineRadioOptions" id="otherGender" checked
+                    value="Other" required/>
+                  <label class="form-check-label" for="otherGender">Other</label>
+                </div>
+                {% endif %}
+              </div>
+
+              <div class="form-outline mb-4">
+                <input type="text" name="district" placeholder="District" class="form-control form-control-lg" value="{{ r.district}}"/>
+                
+              </div>
+
+              <div class="form-outline mb-4">
+                <input type="text" name="state" placeholder="State" class="form-control form-control-lg" value="{{ r.state}}"/>
+                
+              </div>
+
+              <div class="form-outline mb-4 ">
+                <input type="text" name="address" placeholder="Address" class="form-control form-control-lg" value="{{ r.address}}"/>
+              </div>
+
+              <div class="form-outline mb-4">
+                <input type="text"  name="pincode" placeholder="Pincode" class="form-control form-control-lg" value="{{r.pincode}}"/>
+              </div>
+             
+              
+                <input type="hidden"  name="user_id"  value="{{r.user_id}}"/>
+
+              
+              <div class="d-flex justify-content-end pt-3">
+                <button type="Submit" class="btn btn-warning btn-lg ms-2">Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  {% endfor %}
+
+
+
+
+{% endblock  %}

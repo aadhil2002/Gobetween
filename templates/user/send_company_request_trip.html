@@ -1,0 +1,96 @@
+
+
+{% extends 'user/user_base.html' %}
+{% load static %}
+{% block content %}
+{% if message %}
+<script>
+alert("{{ message }}")
+</script>
+{% endif %}
+<form class="h-100 h-custom" action="" method="post">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-8 col-xl-10">
+        <div class="card rounded-3">
+          <div class="card-body p-4 p-md-5">
+            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Request Trip</h3>
+            {% csrf_token %}
+            <div class="form-outline mb-4">
+              <input type="hidden" value="{{view_details.id}}" name="id123" class="form-control form-control-lg" />
+            </div>
+            <div class="form-outline mb-4">
+              <input type="text" value="{{user.first_name}}" name="name" placeholder="Name" class="form-control form-control-lg" required />
+            </div>
+            <div class="form-outline mb-4">
+              <select name="pickup_place" class="form-control selectpicker" >
+                <option value="location" >Pickup Location</option>
+              {% for i in loc  %}
+                <option value="{{ i.location}}">{{i.location}}</option>
+              {% endfor %}
+              </select>
+              
+            </div>
+
+            <div class="form-outline mb-4">
+              <select name="to_place" class="form-control selectpicker" >
+                <option value="location" >Drop Location</option>
+              {% for i in loc  %}
+                <option value="{{ i.location}}">{{i.location}}</option>
+              {% endfor %}
+              </select>
+              
+            </div>
+
+            <div class="form-outline mb-4">
+              <input type="text" name="mobile" placeholder="Mobile No." class="form-control form-control-lg" pattern="[789][0-9]{9}" required/>
+            </div>
+
+            <div class="form-outline mb-4">
+              <input type="time" name="time" placeholder="Pick-up Time" class="form-control form-control-lg" required/>
+              
+            </div>
+            
+
+            <div class="form-outline mb-4">
+              <input type="date" name="date" placeholder="date" id="datefield" min="" class="form-control form-control-lg" required/>
+              
+            </div>
+
+            <div class="form-outline mb-4">
+              <input type="text" name="no_of_person" placeholder="No. Of Person" class="form-control form-control-lg"/>
+              
+            </div>
+            <div class="form-outline mb-4">
+              <input type="text" name="purpose" placeholder="Purpose Of Trip" class="form-control form-control-lg" required/>
+              
+            </div>
+            
+            <div class="d-flex justify-content-end pt-3">
+              <button type="Submit" class="btn btn-warning btn-lg ms-2">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<script>
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth() + 1; //January is 0!
+var yyyy = today.getFullYear();
+
+if (dd < 10) {
+   dd = '0' + dd;
+}
+
+if (mm < 10) {
+   mm = '0' + mm;
+} 
+    
+today = yyyy + '-' + mm + '-' + dd;
+document.getElementById("datefield").setAttribute("min", today);
+</script>
+
+{% endblock %}

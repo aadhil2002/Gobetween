@@ -1,0 +1,50 @@
+{% extends 'company/company_base.html' %}
+{% load static %}
+{% block content %}
+{% if message %}
+<script>
+alert("{{ message }}")
+</script>
+{% endif %}
+
+
+ <div class="container add-emp" style="overflow-x:auto;">
+			<center><h1 style="color:black;"><strong>Trip Status</strong></h1><br></center>
+			<table class="table table-bordered table-hover">
+				<thead class="thead-dark">
+					<tr>
+                        <th class="p-3 mb-2 bg-primary text-light">Name</th>
+						<th class="p-3 mb-2 bg-primary text-light">Pickup Place</th>
+						<th class="p-3 mb-2 bg-primary text-light">To Place</th>
+                        <th class="p-3 mb-2 bg-primary text-light">Mobile</th>
+                        <th class="p-3 mb-2 bg-primary text-light">Time</th>
+                        <th class="p-3 mb-2 bg-primary text-light">Date</th>
+                        <th class="p-3 mb-2 bg-primary text-light">No Of Person</th>
+                        <th class="p-3 mb-2 bg-primary text-light">Trip Amount</th>
+                        <th class="p-3 mb-2 bg-primary text-light">Payment</th>
+						<th class="p-3 mb-2 bg-primary text-light">Trip Status</th>
+
+					{% for i in trip_stat  %}
+                    {% for v in ts %}
+                    {% if  i.id == v.trip_id %}
+                    </tr>
+                            <td>{{ i.name }}</td>
+							<td>{{ i.pickup_place }}</td>
+                    		<td>{{ i.to_place }}</td>
+                            <td>{{ i.mobile }}</td>
+                            <td>{{ i.time }}</td>
+                            <td>{{ i.date }}</td>
+                            <td>{{ i.no_of_person }}</td>
+                            <td>{{ v.total_amt }}</td>
+                            <td>{{ i.payment }}</td>
+                    <td>{{ v.status }}</td>
+
+						</tr>
+                        {% endif %}
+                {% endfor %}
+                {% endfor %}
+
+		    </table>
+		</div>
+  
+  {% endblock %}

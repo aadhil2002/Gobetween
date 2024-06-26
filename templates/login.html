@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block content %}
+
+{% if message %}
+<script>
+  alert("{{message}}")
+</script>
+{% endif %}
+
+
+    <!-- Page Header Start -->
+    <div class="container-fluid page-header py-5" style="margin-bottom: 6rem;">
+        <div class="container py-5">
+            <h1 class="display-3 text-white mb-3 animated slideInDown">Login</h1>
+            <nav aria-label="breadcrumb animated slideInDown">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
+                    <li class="breadcrumb-item text-white active" aria-current="page">Login</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+
+    <!-- login Start -->
+    <section class="vh-150 bg-dark">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-xl-11">
+              <div class="card" style="border-radius: 1rem;">
+                <div class="row g-0">
+                  <div class="col-md-6 col-lg-5 d-none d-md-block">
+                    <img src="{% static 'img/transport.jpg' %}"
+                      alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
+                  </div>
+                  <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                    <div class="card-body p-4 p-lg-5 text-black">
+      
+                      <form action="" method="post">
+      
+                        <div class="d-flex align-items-center mb-3 pb-1">
+                          <span class="h1 fw-bold mb-0">GoBetween</span>
+                        </div>
+      
+                        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
+                      {% csrf_token %}
+      
+                        <div class="form-outline mb-4">
+                          <input type="username" name="username" id="form2Example17" placeholder="Username" class="form-control form-control-lg" />
+                        </div>
+      
+                        <div class="form-outline mb-4">
+                          <input type="password" name="password" id="form2Example27" placeholder="Password" class="form-control form-control-lg" />
+                        </div>
+      
+                        <div class="pt-1 mb-4">
+                          <button class="btn btn-dark btn-lg btn-block" type="Submit">Login</button>
+                        </div>
+      
+                        <a class="small text-muted" href="#!">Forgot password?</a>
+                        <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a href="user_reg"
+                            style="color: #393f81;">Register here</a></p>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    <!-- user login End -->
+        
+
+    {% endblock %}

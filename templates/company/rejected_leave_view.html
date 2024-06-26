@@ -1,0 +1,74 @@
+{% extends 'company/company_base.html' %}
+{% load static %}
+{% block content %}
+
+{% if message %}
+<script>
+alert("{{ message }}")
+</script>
+{% endif %}
+<br><br><br><br>
+<section class="intro-single">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-lg-8">
+        <div class="title-single-box">
+          <h2 class="mb-5 text-uppercase">Rejected Leave View</h2>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!--/ Intro Single End /-->
+<br><br><br><br>
+<!--/ Contact Star /-->
+<section class="contact">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="contact-map box">
+
+        </div>
+      </div>
+        <div class="col-sm-12 section-t8">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="container add-emp" style="overflow-x:auto;border-radius: 5px;
+              background-color: #f2f2f2;
+              padding: 20px;
+                margin-top: -150px;">
+   <table class="table table-bordered table-striped table-hover">
+
+<th class="info" style="background-color: lightgreen;">Driver Name</th>
+<th class="info" style="background-color: lightgreen;">Driver Mobile</th>
+<th class="info" style="background-color: lightgreen;">From Date</th>
+<th class="info" style="background-color: lightgreen;">To Date</th>
+<th class="info" style="background-color: lightgreen;">Number of Days</th>
+<th class="info" style="background-color: lightgreen;">Reason</th>
+<th class="info" style="background-color: lightgreen;">Status</th>
+{% for leave in l_view %}
+<tr>
+    <td>{{ leave.driver.user.first_name}}</td>
+    <td>{{ leave.driver.mobile}}</td>
+    <td>{{ leave.startdate}}</td>
+    <td>{{ leave.enddate}}</td>
+    <td>{{ leave.no_of_days}}</td>
+    <td>{{ leave.reason}}</td>
+    <td>{{ leave.status}}</td>
+</tr>
+{% endfor %}
+    
+</table>
+</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+  <!--/ Contact End /-->
+
+  <!--/ footer Star /-->

@@ -1,0 +1,104 @@
+
+
+{% extends 'driver/driver_base.html' %}
+{% load static %}
+{% block content %}
+{% if message %}
+<script>
+alert("{{ message }}")
+</script>
+{% endif %}
+<script type="text/javascript">
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+    
+    if (dd < 10) {
+       dd = '0' + dd;
+    }
+    
+    if (mm < 10) {
+       mm = '0' + mm;
+    } 
+        
+    today = yyyy + '-' + mm + '-' + dd;
+    document.getElementById("datefield1").setAttribute("min", today);
+    
+    function X()
+    {
+    
+    const firstDate = document.getElementById('d1').value; 
+    const secondDate = document.getElementById('d2').value;
+    const startTimestamp = new Date(firstDate).getTime(); 
+    const endTimestamp = new Date(secondDate).getTime();
+    const difference = endTimestamp-startTimestamp;
+    const differenceInDays = Math.round(difference /(1000*60*60*24));
+    
+    const dayCountElement=document.getElementById('no_of_days');
+    
+    dayCountElement.value = differenceInDays;
+    }
+    </script>
+<form class="h-100 h-custom" action="" method="post">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-8 col-xl-10">
+        <div class="card rounded-3">
+          <div class="card-body p-4 p-md-5">
+            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Request Leave</h3>
+            {% csrf_token %}
+            {% for i in driver  %}
+            <div class="form-outline mb-4">
+              <input type="text" value="{{ i.user.first_name }}" name="driver_name" placeholder="Name" class="form-control form-control-lg" disabled required />
+            </div>
+            
+
+           
+
+            <div class="form-outline mb-4">
+              <input type="text" value="{{ i.mobile }}" name="mobile" placeholder="Mobile No." class="form-control form-control-lg" pattern="[789][0-9]{9}" disabled required/>
+            </div>
+
+            <div class="form-outline mb-4">
+                <input type="hidden" value="{{ i.company.id }}" name="company"  class="form-control form-control-lg"  />
+              </div>
+
+            {% endfor %}
+            
+
+            <div class="form-outline mb-4">
+                <h6 class="form-label" for="form3Example1q">Starting Date: </h6>
+                <input type="date"  id="d1"  name="startdate"   class="form-control form-control-lg" required/>
+              </div>
+              <div class="form-outline mb-4">
+                <h6 class="form-label" for="form3Example1q">Ending Date: </h6>
+                <input type="date"  id="d2"  name="enddate"    class="form-control form-control-lg" required/>
+              </div>
+
+            
+            <div class="form-outline mb-4">
+              <input type="text" name="reason" id="reason" placeholder="Reason for Leave"  class="form-control form-control-lg" required/>
+            </div>
+            
+            <div class="form-outline mb-4">
+                <input type="hidden"   id="no_of_days" name="no_of_days" class="form-control form-control-lg" />
+              </div>
+
+            <div class="d-flex justify-content-end pt-3">
+              <button type="Submit" onclick="X()" class="btn btn-warning btn-lg ms-2">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+
+    
+ 
+      
+
+
+ {% endblock %}

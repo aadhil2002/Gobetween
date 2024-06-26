@@ -1,0 +1,82 @@
+{% extends 'user/user_base.html' %}
+{% load static %}
+{% block content %}
+{% if message %}
+<script>
+alert("{{ message }}")
+</script>
+{% endif %}
+<br><br><br><br>
+<section class="intro-single">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-lg-8">
+        <div class="title-single-box">
+          <h2 class="mb-5 text-uppercase">Track Trip</h2>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!--/ Intro Single End /-->
+<br><br><br><br>
+<!--/ Contact Star /-->
+<section class="contact">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="contact-map box">
+
+        </div>
+      </div>
+        <div class="col-sm-12 section-t8">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="container add-emp" style="overflow-x:auto;border-radius: 5px;
+              background-color: #f2f2f2;
+              padding: 20px;
+                margin-top: -150px;">
+   <table class="table table-bordered table-striped table-hover">
+
+<th class="info" style="background-color: lightgreen;">Company Name</th>
+<th class="info" style="background-color: lightgreen;">Driver Name</th>
+<th class="info" style="background-color: lightgreen;">Pick-up location </th>
+<th class="info" style="background-color: lightgreen;">Destination</th>
+<th class="info" style="background-color: lightgreen;">Driver Mobile No.</th>
+<th class="info" style="background-color: lightgreen;">Pick-up Time</th>
+<th class="info" style="background-color: lightgreen;">Date</th>
+<th class="info" style="background-color: lightgreen;">Car Name</th>
+<th class="info" style="background-color: lightgreen;">Car Number</th>
+
+{% for i in trip_stat  %}
+{% for v in ts %}
+{% if  i.id == v.trip_id %}
+
+<tr>
+    <td>{{ v.comp.user.first_name}}</td>
+    <td>{{ v.driver.user.first_name}}</td>
+    <td>{{ i.pickup_place}}</td>
+    <td>{{ i.to_place}}</td>
+    <td>{{ v.driver.mobile}}</td>
+    <td>{{ i.time}}</td>
+    <td>{{ i.date}}</td>
+    <td>{{ v.veh.car_name}}</td>
+    <td>{{ v.veh.car_number}}</td>
+
+</tr>
+{% endif %}
+{% endfor %}
+    {% endfor %}
+</table>
+</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  {% endblock %}

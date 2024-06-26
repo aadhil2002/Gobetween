@@ -1,0 +1,80 @@
+
+{% extends 'admin/admin_base.html' %}
+{% load static %}
+{% block content %}
+
+{% if message %}
+<script>
+alert("{{ message }}")
+</script>
+{% endif %}
+<br><br><br><br>
+  <!--/ Intro Single star /-->
+  <section class="intro-single">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-lg-8">
+          <div class="title-single-box">
+            <h2 class="mb-5 text-uppercase">Driver Verify</h2>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!--/ Intro Single End /-->
+<br><br><br><br>
+  <!--/ Contact Star /-->
+  <section class="contact">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="contact-map box">
+
+          </div>
+        </div>
+        <div class="col-sm-12 section-t8">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="container add-emp" style="overflow-x:auto;border-radius: 5px;
+              background-color: #f2f2f2;
+              padding: 20px;
+                margin-top: -150px;">
+   <table class="table table-bordered table-striped table-hover">
+
+<th class="info" style="background-color: lightgreen;">Name</th>
+<th class="info" style="background-color: lightgreen;">Email</th>
+<th class="info" style="background-color: lightgreen;">Company Name</th>
+<th class="info" style="background-color: lightgreen;">Verify</th>
+<th class="info" style="background-color: lightgreen;">Reject Reason</th>
+<th class="info" style="background-color: lightgreen;">Reject</th>
+{% for dri in app_driver  %}
+<form action="" method="post">
+  {% csrf_token %}
+<tr>
+    <td>{{ dri.user.first_name}}</td>
+
+    <td>{{ dri.user.email}}</td>
+    <td>{{ dri.company.user.first_name}}</td>
+    <td><a href="approve?id={{ dri.user_id}}" class=" btn btn-success">Verify</a></td>
+    <td><input type="text" class="form-control" name="reason"></td>
+    <input type="hidden" name="id"  value="{{ dri.user_id}}">
+    <td><button type="submit" class="btn btn-danger">Reject</button></td>
+
+</tr>
+</form>
+    {% endfor %}
+</table>
+</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+  <!--/ Contact End /-->
+
+  <!--/ footer Star /-->

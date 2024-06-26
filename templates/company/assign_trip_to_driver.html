@@ -1,0 +1,77 @@
+{% extends 'company/company_base.html' %}
+
+{% load static %}
+
+
+{% block content %}
+
+{% if message %}
+<script>
+alert("{{ message }}")
+</script>
+{% endif %}
+<div class="container">
+
+    <form class="well form-horizontal" action="" method="post"  id="contact_form">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Assign Trip</legend>
+
+
+
+{% csrf_token %}
+<!-- Select Basic -->
+   
+<div class="form-group"> 
+    <div class="col-md-4 selectContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+    <select name="driver" class="form-control selectpicker" required>
+      <option value=" " >Select Driver</option>
+	  {% for i in dri  %}
+      <option value="{{ i.id }}">{{ i.user.first_name}}</option>
+	  {% endfor %}
+    {% if  dri1 is not None%}
+    <option value="">--------Freelancer--------</option>
+    {% for i in dri1  %}
+    <option value="{{ i.id }}">{{ i.user.first_name}}</option>
+  {% endfor %}
+  {% endif %}
+    </select>
+    <select name="vehicle" class="form-control selectpicker" required>
+      <option value=" " >Select Vehicle</option>
+	  {% for i in veh  %}
+      <option value="{{ i.id }}">{{ i.car_number}} - {{i.car_name}}</option>
+	  {% endfor %}
+    {% if  veh1 is not None%}
+    <option value="">--------Freelancer--------</option>
+    {% for i in veh1  %}
+      <option value="{{ i.id }}">{{ i.car_number}} - {{i.car_name}} ({{i.driver.user.first_name}})</option>
+	  {% endfor %}
+    {% endif %}
+    </select>
+    
+
+    <input type="hidden" name="id" class="form-control" value="{{trip.id}}" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="{{event.eventname}}">
+
+    <input type="hidden" name="id2" class="form-control" value="{{trip.company_id}}" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="{{event.eventname}}">
+
+  </div>
+  <br>
+<input type="number" name="kms" placeholder="Kilometers" min="1" class="form-control form-control-lg" required/>
+  <br>
+<input type="number" name="trip_amt" placeholder="km/amount" min="1" class="form-control form-control-lg" required/>
+</div>
+</div>
+<br><br>
+
+<!-- Button -->
+<div class="form-group">
+	<label class="col-md-4 control-label"></label>
+	<div class="col-md-4">
+	  <button href="assign_driver?id={{ dri.id }}" type="submit" class="btn btn-warning" >Assign<span class="glyphicon glyphicon-send"></span></button>
+	</div>
+  </div>
+</fieldset>
+{% endblock %}
